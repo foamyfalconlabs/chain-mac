@@ -1,0 +1,17 @@
+{
+  "_comment": "Auto-populated by deploy script. Edit manually if needed.",
+  "local": {
+    "address": null,
+    "deployedAt": null,
+    "txHash": null,
+    "deployer": null
+  },
+  "testnet": {
+    "chain": "linea",
+    "address": "0x5291Ae7F79594214086Deaae0626dD6cbD5FB488",
+    "deployedAt": "2026-05-09T01:46:45.914Z",
+    "txHash": "0x4108407d308f141face425a665fe1f32b141ed97df750e8128e70ae599d98d80",
+    "deployer": "0xC4E206B6ddc8A91780091594ac3e999B3Da6e707",
+    "explorerUrl": "https://lineascan.build/address/0x5291Ae7F79594214086Deaae0626dD6cbD5FB488"
+  }
+}

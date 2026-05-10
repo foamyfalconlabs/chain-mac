@@ -1,0 +1,49 @@
+{
+  "_comment": "Fill this in during Phase 0 & 2. Contract deploy reads from .env but this is the design doc.",
+
+  "identity": {
+    "name": "Money Access Crypto",
+    "symbol": "MAC",
+    "decimals": 18,
+    "version": "1.0.0",
+    "logoUrl": "",
+    "ens": "moneyaccesscrypto.eth"
+  },
+
+  "supply": {
+    "model": "mintable+burnable",
+    "initialSupply": 1000000,
+    "initialSupplyUnit": "tokens",
+    "maxSupply": null,
+    "_supplyModels": ["fixed", "mintable", "burnable", "mintable+burnable", "rebasing"]
+  },
+
+  "distribution": {
+    "deployer": 80,
+    "reserve": 15,
+    "testWallets": 5,
+    "_note": "Percentages must sum to 100"
+  },
+
+  "roles": {
+    "model": "owner",
+    "_roleModels": ["owner", "role-based"],
+    "_note": "owner = single deployer address. role-based = OpenZeppelin AccessControl with MINTER_ROLE, BURNER_ROLE, PAUSER_ROLE"
+  },
+
+  "stablecoinLite": {
+    "enabled": false,
+    "pegTarget": "$1 USD",
+    "pegMechanism": "manual",
+    "_pegMechanisms": ["manual", "chainlink-oracle", "twap"],
+    "_note": "For POC, manual means deployer calls setPrice() to record peg. No actual redemption mechanism."
+  },
+
+  "features": {
+    "pausable": true,
+    "transferFee": false,
+    "transferFeePercent": 0,
+    "feeRecipient": "",
+    "snapshot": false
+  }
+}

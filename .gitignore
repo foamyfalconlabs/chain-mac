@@ -1,0 +1,15 @@
+# Environment — never commit private keys
+.env
+
+# Dependencies
+node_modules/
+
+# Build artifacts
+artifacts/
+cache/
+
+# Claude agent internals
+.claude/
+
+# macOS
+.DS_Store

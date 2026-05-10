@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Token POC Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Header ──────────────────────────────────────────────────────────── -->
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <img src="mac-logo.png" alt="MAC" class="coin-icon-img" />
+        <span id="token-name" class="logo-name">Token Name</span>
+        <span class="symbol" id="token-symbol">TKN</span>
+      </div>
+      <div class="header-actions">
+        <button id="btn-connect" class="btn btn-primary">Connect Wallet</button>
+        <span id="wallet-address" class="wallet-tag hidden"></span>
+        <div class="network-badge" id="network-badge">⚪ Not connected</div>
+      </div>
+    </div>
+
+    <!-- ── Tab Bar ──────────────────────────────────────────────────────── -->
+    <nav class="tab-bar">
+      <button class="tab active" data-tab="home">Home</button>
+      <button class="tab" data-tab="onchain">On-Chain</button>
+      <button class="tab" data-tab="tracker">Tracker</button>
+      <button class="tab" data-tab="tech">Tech</button>
+      <button class="tab" data-tab="more">More</button>
+    </nav>
+  </header>
+
+  <main>
+    <div id="status-banner" class="banner banner-ok">
+      MAC deployed on Linea Mainnet · Contract verified · Connect wallet for live on-chain data
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════════════════
+         TAB: HOME
+    ═══════════════════════════════════════════════════════════════════════ -->
+    <div id="tab-home" class="tab-content active">
+
+      <section class="home-hero">
+        <img src="mac-logo.png" alt="MAC" class="hero-logo" />
+        <div class="hero-title">Money Access Crypto</div>
+        <div class="hero-symbol">MAC</div>
+        
+        <div class="hero-ens">
+           <a href="https://app.ens.domains/name/moneyaccesscrypto.eth" target="_blank" rel="noopener">moneyaccesscrypto.eth</a>
+        </div>
+        
+        <div class="hero-badges">
+          <span class="badge badge-ok">✅ Live on Linea</span>
+          <span class="badge badge-outline">ERC-20</span>
+          <span class="badge badge-outline">1,000,000 Supply</span>
+        </div>
+        
+        <div class="hero-address monospace" id="hero-address">
+          <a href="https://lineascan.build/token/0x5291Ae7F79594214086Deaae0626dD6cbD5FB488" target="_blank" rel="noopener">0x5291Ae7F79594214086Deaae0626dD6cbD5FB488</a>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════════════════
+         TAB: ON-CHAIN
+    ═══════════════════════════════════════════════════════════════════════ -->
+    <div id="tab-onchain" class="tab-content hidden">
+
+      <!-- Identity -->
+      <section class="panel home-details">
+        <div class="panel-header">
+          <h2>Token Details</h2>
+          <span class="badge badge-ok">✅ Live on Linea</span>
+        </div>
+        <div class="detail-grid">
+          <div class="detail-field">
+            <label>Token Name <span class="info-icon" data-tip="token-name">i</span></label>
+            <div class="detail-value" id="d-name">—</div>
+          </div>
+          <div class="detail-field">
+            <label>Symbol / Ticker <span class="info-icon" data-tip="symbol">i</span></label>
+            <div class="detail-value" id="d-symbol">—</div>
+          </div>
+          <div class="detail-field">
+            <label>Blockchain <span class="info-icon" data-tip="blockchain">i</span></label>
+            <div class="detail-value" id="d-chain">—</div>
+          </div>
+          <div class="detail-field">
+            <label>Contract Status <span class="info-icon" data-tip="contract-status">i</span></label>
+            <div class="detail-value" id="d-status">—</div>
+          </div>
+          <div class="detail-field">
+            <label>Contract Address <span class="info-icon" data-tip="contract-address">i</span></label>
+            <div class="detail-value monospace small" id="d-address">Not deployed</div>
+          </div>
+          <div class="detail-field">
+            <label>Deployed</label>
+            <div class="detail-value" id="d-deploy-date">—</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stat cards -->
+      <section class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Total Supply</div>
+          <div class="stat-value" id="stat-supply">1,000,000</div>
+          <div class="stat-sub">MAC · connect wallet for live</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Your Balance</div>
+          <div class="stat-value" id="stat-balance">—</div>
+          <div class="stat-sub">Connect wallet to view</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Deployer %</div>
+          <div class="stat-value" id="stat-deployer-pct">80%</div>
+          <div class="stat-sub">of genesis supply</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Reserve %</div>
+          <div class="stat-value" id="stat-reserve-pct">15%</div>
+          <div class="stat-sub">held in treasury</div>
+        </div>
+      </section>
+
+      <!-- Token details — full -->
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Token Config</h2>
+          <span class="badge badge-outline">on-chain + config</span>
+        </div>
+        <div class="detail-grid">
+          <div class="detail-field">
+            <label>Supply Model <span class="info-icon" data-tip="supply-model">i</span></label>
+            <div class="detail-value" id="d-supply-model">—</div>
+          </div>
+          <div class="detail-field">
+            <label>Initial Supply <span class="info-icon" data-tip="initial-supply">i</span></label>
+            <div class="detail-value" id="d-initial-supply">—</div>
+          </div>
+          <div class="detail-field">
+            <label>Stablecoin-Lite <span class="info-icon" data-tip="stable">i</span></label>
+            <div class="detail-value" id="d-stable">—</div>
+          </div>
+          <div class="detail-field">
+            <label>Deploy TX <span class="info-icon" data-tip="deploy-tx">i</span></label>
+            <div class="detail-value monospace small" id="d-tx">—</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Recent transactions -->
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Recent Activity</h2>
+          <button class="btn btn-sm" id="btn-refresh-tx">↻ Refresh</button>
+        </div>
+        <div id="tx-empty" class="empty-state">
+          Connect wallet to load recent MAC transactions from Linea.
+        </div>
+        <table class="tx-table hidden" id="tx-table">
+          <thead>
+            <tr><th>Type</th><th>From</th><th>To</th><th>Amount</th><th>TX</th><th>Block</th></tr>
+          </thead>
+          <tbody id="tx-body"></tbody>
+        </table>
+      </section>
+
+      <!-- Quick actions -->
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Quick Actions</h2>
+          <span class="badge badge-warn">Requires connected owner wallet</span>
+        </div>
+        <div class="actions-grid">
+          <div class="action-card">
+            <h3>Mint</h3>
+            <input type="text" id="mint-to" placeholder="Recipient address" />
+            <input type="number" id="mint-amount" placeholder="Amount" />
+            <button class="btn btn-primary" id="btn-mint" disabled>Mint Tokens</button>
+          </div>
+          <div class="action-card">
+            <h3>Burn</h3>
+            <input type="number" id="burn-amount" placeholder="Amount to burn" />
+            <button class="btn btn-danger" id="btn-burn" disabled>Burn Tokens</button>
+          </div>
+          <div class="action-card">
+            <h3>Transfer</h3>
+            <input type="text" id="transfer-to" placeholder="Recipient address" />
+            <input type="number" id="transfer-amount" placeholder="Amount" />
+            <button class="btn btn-primary" id="btn-transfer" disabled>Transfer</button>
+          </div>
+          <div class="action-card">
+            <h3>Pause / Unpause</h3>
+            <p class="action-desc">Emergency stop for all transfers.</p>
+            <button class="btn btn-warn" id="btn-pause" disabled>Pause Contract</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════════════════
+         TAB: TRACKER
+    ═══════════════════════════════════════════════════════════════════════ -->
+    <div id="tab-tracker" class="tab-content hidden">
+
+      <!-- ── Name Research (Phase 0) ──────────────────────────────────────── -->
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Name Research</h2>
+          <span class="badge badge-outline">Phase 0</span>
+        </div>
+        <p class="tab-hint">Check if a name or ticker is already taken before committing to it.</p>
+        <div class="name-search-row">
+          <input type="text" id="nr-name" placeholder="Token name  (e.g. MyToken)" />
+          <input type="text" id="nr-ticker" placeholder="Ticker  (e.g. TKN)" style="text-transform:uppercase" maxlength="10" />
+          <button class="btn btn-primary" id="btn-name-search">Check</button>
+        </div>
+
+        <div id="nr-results" class="nr-results hidden">
+          <div class="nr-section">
+            <div class="nr-section-label">CoinGecko matches</div>
+            <div id="nr-cg-results"></div>
+          </div>
+          <div class="nr-section">
+            <div class="nr-section-label">Quick links</div>
+            <div id="nr-links" class="nr-links"></div>
+          </div>
+        </div>
+        <div id="nr-loading" class="empty-state hidden">Searching CoinGecko…</div>
+        <div id="nr-error" class="banner banner-error hidden"></div>
+      </section>
+
+      <!-- Token + network config tables -->
+      <div class="two-col">
+        <section class="panel">
+          <div class="panel-header">
+            <h2>Token Config <span class="info-icon" data-tip="token-config">i</span></h2>
+            <span class="badge badge-outline">token-config.json</span>
+          </div>
+          <table class="config-table" id="config-table"><tbody></tbody></table>
+        </section>
+        <section class="panel">
+          <div class="panel-header">
+            <h2>Network Config <span class="info-icon" data-tip="network-config">i</span></h2>
+            <span class="badge badge-outline">networks.json</span>
+          </div>
+          <table class="config-table" id="network-table"><tbody></tbody></table>
+        </section>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════════════════
+         TAB: TECH
+    ═══════════════════════════════════════════════════════════════════════ -->
+    <div id="tab-tech" class="tab-content hidden">
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Tech Stack</h2>
+          <span class="badge badge-outline">running list</span>
+        </div>
+        <p class="tab-hint">Everything in use across the full coin-poc setup. Useful for explaining the project or onboarding someone.</p>
+
+        <div class="tech-grid" id="tech-grid">
+
+          <div class="tech-group">
+            <div class="tech-group-label">Smart Contract</div>
+            <div class="tech-item">
+              <div class="tech-name">Solidity 0.8.20</div>
+              <div class="tech-desc">Contract language — statically typed, compiles to EVM bytecode</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-name">OpenZeppelin Contracts</div>
+              <div class="tech-desc">ERC-20, Burnable, Pausable, Ownable — audited base contracts</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-name">ERC-20 Standard</div>
+              <div class="tech-desc">Token interface: transfer, approve, allowance, totalSupply, balanceOf</div>
+            </div>
+          </div>
+
+          <div class="tech-group">
+            <div class="tech-group-label">Toolchain</div>
+            <div class="tech-item">
+              <div class="tech-name">Hardhat</div>
+              <div class="tech-desc">Local EVM node, compile, test, and deploy scripts — runs in Node.js</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-name">ethers.js v6</div>
+              <div class="tech-desc">JS library for talking to Ethereum nodes — used in scripts and UI</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-name">Mocha + Chai</div>
+              <div class="tech-desc">Test runner and assertion library used by Hardhat's test suite</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-name">dotenv</div>
+              <div class="tech-desc">Loads .env vars (private key, RPC URL) into Hardhat config</div>
+            </div>
+          </div>
+
+          <div class="tech-group">
+            <div class="tech-group-label">Blockchain — Linea Mainnet ✓</div>
+            <div class="tech-item">
+              <div class="tech-name">Linea <span class="badge badge-outline">chosen</span></div>
+              <div class="tech-desc">ConsenSys / MetaMask zkEVM L2. Chain ID 59144. Very low gas (~$0.10–0.50 to deploy). Strong dev credibility</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-name">Lineascan</div>
+              <div class="tech-desc">Block explorer for Linea — lineascan.build. Verify source code after deploy</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-name">Linea Bridge</div>
+              <div class="tech-desc">bridge.linea.build — move ETH from Ethereum mainnet to Linea to fund deploy wallet</div>
+            </div>
+          </div>
+
+          <div class="tech-group">
+            <div class="tech-group-label">Dashboard UI</div>
+            <div class="tech-item">
+              <div class="tech-name">Vanilla HTML/CSS/JS</div>
+              <div class="tech-desc">No build step — open index.html directly or serve statically</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-name">ethers.js (CDN)</div>
+              <div class="tech-desc">Same lib as scripts — powers MetaMask connect and contract calls</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-name">MetaMask</div>
+              <div class="tech-desc">Browser wallet — injects window.ethereum for signing transactions</div>
+            </div>
+          </div>
+
+          <div class="tech-group">
+            <div class="tech-group-label">AI / Agent Layer</div>
+            <div class="tech-item">
+              <div class="tech-name">Anthropic SDK <span class="badge badge-outline">@anthropic-ai/sdk</span></div>
+              <div class="tech-desc">Official Node.js SDK for Claude — used by the PM agent for tool use and prompt caching</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-name">Prompt Caching</div>
+              <div class="tech-desc">System prompt cached across turns via cache_control — reduces latency and token cost on repeated agent calls</div>
+            </div>
+          </div>
+
+          <div class="tech-group">
+            <div class="tech-group-label">Optional / Stretch</div>
+            <div class="tech-item">
+              <div class="tech-name">Chainlink Price Feeds</div>
+              <div class="tech-desc">On-chain ETH/USD oracle — used for stablecoin-lite peg tracking</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-name">Hardhat Etherscan plugin</div>
+              <div class="tech-desc">Verify source code on block explorer after testnet deploy</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-name">GitHub Pages / Vercel</div>
+              <div class="tech-desc">Host this dashboard as a static site — no backend needed</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════════════════
+         TAB: MORE — Tokenomics Visualizer
+    ═══════════════════════════════════════════════════════════════════════ -->
+    <div id="tab-more" class="tab-content hidden">
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Tokenomics Visualizer</h2>
+          <span class="badge badge-outline">design sandbox</span>
+        </div>
+        <p class="tab-hint">Play with supply and distribution. Nothing here writes to any file — it's a design scratchpad.</p>
+
+        <div class="toke-layout">
+
+          <!-- Controls -->
+          <div class="toke-controls">
+            <div class="toke-field">
+              <label>Total Supply</label>
+              <input type="number" id="tk-supply" value="1000000" min="1" />
+            </div>
+
+            <div class="toke-field">
+              <label>Supply Model</label>
+              <select id="tk-model">
+                <option value="fixed">Fixed — no minting after deploy</option>
+                <option value="mintable" >Mintable — owner can mint more</option>
+                <option value="burnable">Burnable — holders can destroy tokens</option>
+                <option value="mintable+burnable" selected>Mintable + Burnable</option>
+              </select>
+            </div>
+
+            <div class="toke-divider">Distribution (must sum to 100%)</div>
+
+            <div class="toke-slider-group" id="tk-sliders">
+              <!-- rendered by JS -->
+            </div>
+
+            <div class="toke-sum-row">
+              <span>Total</span>
+              <span id="tk-sum" class="tk-sum-ok">100%</span>
+            </div>
+          </div>
+
+          <!-- Chart + breakdown -->
+          <div class="toke-chart-col">
+            <svg id="tk-donut" viewBox="0 0 200 200" width="200" height="200">
+              <circle cx="100" cy="100" r="80" fill="none" stroke="var(--surface2)" stroke-width="36"/>
+              <!-- segments rendered by JS -->
+            </svg>
+            <div class="toke-legend" id="tk-legend"></div>
+          </div>
+
+        </div>
+
+        <!-- Breakdown table -->
+        <table class="config-table toke-table" id="tk-table" style="margin-top:20px">
+          <thead>
+            <tr>
+              <th style="color:var(--text-muted);font-size:11px;padding:8px">Bucket</th>
+              <th style="color:var(--text-muted);font-size:11px;padding:8px">%</th>
+              <th style="color:var(--text-muted);font-size:11px;padding:8px">Tokens</th>
+              <th style="color:var(--text-muted);font-size:11px;padding:8px">Notes</th>
+            </tr>
+          </thead>
+          <tbody id="tk-tbody"></tbody>
+        </table>
+
+        <div class="toke-hint">
+          To save these values: update <code>config/token-config.json</code> →
+          <code>supply.initialSupply</code>, <code>supply.model</code>, and <code>distribution.*</code>
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <footer>
+    <span>Money Access Crypto (MAC) · Linea Mainnet · not financial advice</span>
+    <span>
+      <a href="https://lineascan.build/token/0x5291Ae7F79594214086Deaae0626dD6cbD5FB488" target="_blank" rel="noopener" style="color:var(--text-muted)">0x5291Ae7F79594214086Deaae0626dD6cbD5FB488 on Lineascan ↗</a>
+      <span id="footer-chain"></span>
+    </span>
+  </footer>
+
+  <!-- Global tooltip container -->
+  <div id="info-tooltip" class="info-tooltip" role="tooltip">
+    <div class="info-tooltip-title" id="tt-title"></div>
+    <div class="info-tooltip-body" id="tt-body"></div>
+    <div class="info-tooltip-links" id="tt-links"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.1/ethers.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

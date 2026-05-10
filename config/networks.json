@@ -1,0 +1,69 @@
+{
+  "_comment": "Pick one chain to start. Uncomment active, leave others for reference.",
+  "active": "linea",
+
+  "chains": {
+    "ethereum_sepolia": {
+      "name": "Ethereum Sepolia Testnet",
+      "chainId": 11155111,
+      "rpc": "https://rpc.sepolia.org",
+      "explorer": "https://sepolia.etherscan.io",
+      "faucet": "https://faucets.chain.link/sepolia",
+      "standard": "ERC-20",
+      "notes": "Most tooling support. High mainnet gas but testnet is free."
+    },
+    "polygon_amoy": {
+      "name": "Polygon Amoy Testnet",
+      "chainId": 80002,
+      "rpc": "https://rpc-amoy.polygon.technology",
+      "explorer": "https://amoy.polygonscan.com",
+      "faucet": "https://faucet.polygon.technology",
+      "standard": "ERC-20 (EVM compatible)",
+      "notes": "Low mainnet fees. Good for high-volume token transfers."
+    },
+    "base_sepolia": {
+      "name": "Base Sepolia Testnet",
+      "chainId": 84532,
+      "rpc": "https://sepolia.base.org",
+      "explorer": "https://sepolia.basescan.org",
+      "faucet": "https://faucet.quicknode.com/base/sepolia",
+      "standard": "ERC-20 (EVM compatible)",
+      "notes": "Coinbase L2. Good retail/consumer story."
+    },
+    "arbitrum_sepolia": {
+      "name": "Arbitrum Sepolia Testnet",
+      "chainId": 421614,
+      "rpc": "https://sepolia-rollup.arbitrum.io/rpc",
+      "explorer": "https://sepolia.arbiscan.io",
+      "faucet": "https://faucets.chain.link/arbitrum-sepolia",
+      "standard": "ERC-20 (EVM compatible)",
+      "notes": "Fast L2 with Ethereum security. DeFi-native community."
+    },
+    "linea": {
+      "name": "Linea Mainnet",
+      "chainId": 59144,
+      "rpc": "https://rpc.linea.build",
+      "explorer": "https://lineascan.build",
+      "bridge": "https://bridge.linea.build",
+      "standard": "ERC-20 (zkEVM)",
+      "notes": "ConsenSys/MetaMask zkEVM L2. Very low gas (~$0.10-0.50 to deploy). Strong dev credibility."
+    },
+    "solana_devnet": {
+      "name": "Solana Devnet",
+      "cluster": "devnet",
+      "rpc": "https://api.devnet.solana.com",
+      "explorer": "https://explorer.solana.com/?cluster=devnet",
+      "faucet": "https://faucet.solana.com",
+      "standard": "SPL Token",
+      "notes": "Different paradigm — not EVM. Requires Anchor framework instead of Hardhat.",
+      "toolchain": "anchor"
+    }
+  },
+
+  "local": {
+    "name": "Hardhat Local Node",
+    "chainId": 31337,
+    "rpc": "http://127.0.0.1:8545",
+    "notes": "Always start here. Fast, no gas costs, instant finality."
+  }
+}

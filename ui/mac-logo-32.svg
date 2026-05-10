@@ -1,0 +1,15 @@
+<svg width="32" height="32" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="c"><circle cx="100" cy="100" r="100"/></clipPath>
+  </defs>
+  <circle cx="100" cy="100" r="100" fill="#0d1b6e"/>
+  <g clip-path="url(#c)">
+    <polygon points="0,0 200,0 200,10 0,20" fill="#e53935"/>
+    <polygon points="0,20 200,10 200,20 0,40" fill="#fb8c00"/>
+    <polygon points="0,40 200,20 200,30 0,60" fill="#fdd835"/>
+    <polygon points="0,60 200,30 200,40 0,80" fill="#43a047"/>
+    <polygon points="0,80 200,40 200,50 0,100" fill="#00acc1"/>
+    <polygon points="0,100 200,50 200,60 0,120" fill="#1565c0"/>
+  </g>
+  <text x="100" y="166" text-anchor="middle" clip-path="url(#c)" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-style="italic" font-size="74" fill="white">MAC</text>
+</svg>

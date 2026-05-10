@@ -1,6 +1,9 @@
-# Foamy Falcon: A lab for problem solving... and making.
+# Money Access Crypto (MAC)
 
-Money Access Crypto (MAC) — Learning Proof-of-Concept ERC-20 token deployed on Linea Mainnet (Ethereum Layer 2). Built with Solidity, Hardhat, and OpenZeppelin.
+Learning Proof-of-Concept ERC-20 token deployed on Linea Mainnet (Ethereum Layer 2). Built with Solidity, Hardhat, and OpenZeppelin.
+
+### Technical Architecture
+MAC leverages the OpenZeppelin ERC-20 standard, incorporating Burnable and Pausable extensions to provide a robust framework for secure token management. Deployed on the Linea zkEVM, the contract benefits from Ethereum security at L2 speeds and costs. The system includes an integrated vanilla JS dashboard for real-time on-chain interaction and monitoring.
 
 ## Identity
 - **ENS:** [moneyaccesscrypto.eth](https://app.ens.domains/name/moneyaccesscrypto.eth)
@@ -69,4 +72,4 @@ npx hardhat verify --network linea <address> "Money Access Crypto" "MAC" 1000000
 
 ---
 
-*Foamy Falcon Labs*
+*Foamy Falcon: A lab for problem solving... and making.*
